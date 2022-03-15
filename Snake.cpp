@@ -1,7 +1,7 @@
 #include <iostream>
 #include <deque>
 #include <vector>
-
+#include <conio.h>
 #include <time.h>
 using namespace std;
 class cPlayer
