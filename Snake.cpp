@@ -152,48 +152,65 @@ public:
 };
 int main()
 {
-    
-    int Ans=0;
-    clear();
-    cout<<"Choose game"<<endl;
-    cout<<"1.Poker"<<endl;
-    cout<<"2.Cross Road"<<endl;
-    int choice;
-    cout<<"|___________________";
-    cin >> choice;
-    switch (choice)
-    {
-    case 1:
-        clear();
-        cout<<"This game is Pokergame."<<endl;
-	    Ans=Start();
-	    if(Ans==1){
-		clear();
-		Playgame();
-		char i='n';
-		printf("Want to play another round y|n :");
-		do{		
-				i = getchar();
-			} while (i!='y' &&i!='n');
-			if(i=='y'){
-				main();
-	 		}
+   	char Ans,y,n,Y,N;
+	cout<<" _____________________"<<endl;
+	cout<<"|                     |"<<endl;
+	cout<<"|Welcome to weed game.|"<<endl;
+	cout<<"|_____________________|"<<endl;
+	re:
+   	cout<<"Want to start playing now ? y|n :"; 
+    cin>>Ans;
+    if(Ans == ('y')||Ans == ('Y')){
+		int Ans=0;
+	    clear();
+	    cout<<"Choose game"<<endl;
+	    cout<<"1.Poker"<<endl;
+	    cout<<"2.Cross Road"<<endl;
+	    int choice;
+	    cin >> choice;
+	    switch (choice)
+	    {
+	    case 1:
+	        clear();
+	        cout<<"This game is Pokergame."<<endl;
+		    Ans=Start();
+		    if(Ans==1){
+			clear();
+			Playgame();
+			char i='n';
+			printf("Want to play another round y|n :");
+			do{		
+					i = getchar();
+				} while (i!='y' &&i!='n');
+				if(i=='y'){
+					main();
+		 		}
+		    }
+	        break;
+	    case 2:
+	        cout<<"This game is CrossRoad game."<<endl;
+	        srand(time(NULL));
+	        cGame game(30, 5);
+	        game.Run();
+	        cout << "Game over!" << endl;
+	        getchar();
+	        break;
 	    }
-        break;
-    case 2:
-        cout<<"This game is CrossRoad game."<<endl;
-        srand(time(NULL));
-        cGame game(30, 5);
-        game.Run();
-        cout << "Game over!" << endl;
-        getchar();
-        break;
-    }
-    clear();
-	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
-	return 0;
-    
+	    clear();
+		printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+		return 0;
+	}
+    if(Ans == ('n')||Ans == ('N')){
+    	cout<<"Bye bye see you next time.!!!"<<endl;
+	}
+	else{
+    	clear();
+		cout<<"Please input y|n.!!!"<<endl;
+		goto re;
+	}
+	
 }
+
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
