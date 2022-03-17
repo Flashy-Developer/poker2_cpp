@@ -13,17 +13,6 @@
 #define clear()    system("clear")
 #endif
 using namespace std;
-double discount(double score1) {
-   	return score1;
-}	
-
-double discount(double score1, double score2) {
-    return score1 + score2;
-}
-
-double discount(double score1, double score2, double score3) {
-    return score1 + score2 + score3;
-}
 int Start(void);
 int Cstart(void);
 void Playgame(void);
@@ -99,6 +88,21 @@ int Cstart(void){
 		return 1;
 	}
     return 0;
+}
+double count(double score1) {
+   	return score1;
+}	
+
+double count(double score1, double score2) {
+   	return score1 - score2;
+}
+
+double discount(double score1, double score2) {
+    return score1 - score2;
+}
+
+double discount(double score1, double score2, double score3) {
+    return score1 - score2 - score3;
 }
 int Start(void){
 	printf("                       1111___11111\n");
@@ -492,9 +496,11 @@ class round : public question {
 
 int main()
 {
+	int score;
+	string playername;
 	round round1;
 	clear();
-   	char input,y,n,Y,N;
+   	char Ans,y,n,Y,N;
 	re:
 	cout<<" _______________________"<<endl;
 	cout<<"|                       |"<<endl;
@@ -504,8 +510,8 @@ int main()
 	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
    	round1.want(); 
-    cin>>input;
-    if(input == ('y')||input == ('Y')){
+    cin>>Ans;
+    if(Ans == ('y')||Ans == ('Y')){
 		int Ans=0;
 	    clear();
 	    rech:
@@ -518,6 +524,7 @@ int main()
 	    cout<<"|1.Poker                                   |"<<endl;	
 	    cout<<"|2.The journey of spade                    |"<<endl;
 	    cout<<"|3.Exit                                    |"<<endl;
+	    cout<<"|4.Check score The journey of spade        |"<<endl;
 	    cout<<"|__________________________________________|"<<endl;
 	    cout<<"Please choose 1|2|3|4:";
 	    int choice;
@@ -539,8 +546,7 @@ int main()
 					main();
 		 		}
 		    }
-		}
-	        
+		}   
 		if(choice == 2){
 			clear();
 	        cout<<"This game is The journey of spade game."<<endl;
@@ -550,6 +556,10 @@ int main()
 			Playgame_2 game(30, 8);
 			game.Run();
 	        char i='n';
+	        cout << "NamePlayer : ";
+	        cin >> playername;
+	        cout << "Score : ";
+	        cin >> score;
 	        round1.another();
 			do{		
 					i = getchar();
@@ -564,13 +574,22 @@ int main()
 	    	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
+		if(choice == 4){
+	    	clear();
+			cout << "\tScore Board" << endl;
+   			cout << "Akami  : " << discount(10000, 5000) << endl;
+    		cout << "Kapkan : " << discount(10000, 5000, 2500) << endl;
+    		cout << "Get    : " << count(10000, 5000) << endl;
+    		cout << playername <<" : "<< count(score) << endl;
+    		return 0;
+		}
 		else{
 			clear();
 			cout<<"Please input only 1|2|3|4.!!!"<<endl;
 			goto rech;
 		}   
 	}
-    if(input == ('n')||input == ('N')){
+    if(Ans == ('n')||Ans == ('N')){
     	cout<<"Bye bye see you next time.!!!"<<endl;
 	}
 	else{
