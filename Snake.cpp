@@ -89,6 +89,17 @@ int Cstart(void){
 	}
     return 0;
 }
+double discount(double score1) {
+   	return score1;
+}	
+
+double discount(double score1, double score2) {
+    return score1 + score2;
+}
+
+double discount(double score1, double score2, double score3) {
+    return score1 + score2 + score3;
+}
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -466,9 +477,22 @@ void Playgame_2::Run()
             wot();
         }
     }
+class question {
+   public:
+    void want() {
+        cout << "Want to start playing now ? y|n :" << endl;
+    }
+};
+class round : public question {
+	public:
+    void another() {
+        cout << "Want to play another round y|n :" << endl;
+    }
+};
 
 int main()
 {
+	round round1;
 	clear();
    	char Ans,y,n,Y,N;
 	re:
@@ -479,7 +503,7 @@ int main()
 	cout<<"|                       |"<<endl;
 	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
-   	cout<<" Want to start playing now ? y|n :"; 
+   	round1.want(); 
     cin>>Ans;
     if(Ans == ('y')||Ans == ('Y')){
 		int Ans=0;
@@ -508,7 +532,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			printf("Want to play another round y|n :");
+			round1.another();
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -527,7 +551,7 @@ int main()
 			Playgame_2 game(30, 8);
 			game.Run();
 	        char i='n';
-	        printf("Want to play another round y|n :");
+	        round1.another();
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -536,15 +560,18 @@ int main()
 		 		}
 		    }
 	    }
-	     if(choice == 3){
+	    if(choice == 3){
 	    	clear();
 	    	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
 		if(choice == 4){
 	    	clear();
-
-			return 0;
+			cout << "\tScore Record" << endl;
+   			cout << discount(12492) << endl;
+    		cout << discount(12492, 1425) << endl;
+    		cout << discount(12492, 1425, 14257) << endl;
+    		return 0;
 		}
 		else{
 			clear();
