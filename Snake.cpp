@@ -5,6 +5,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fstream>
+#include <string>
 
 #ifdef _WIN32
 #define clear()    system("cls")
@@ -135,6 +137,24 @@ public:
         }
     }
 };
+int Cstart(void){
+	string myText;
+	ifstream MyReadFile("crh.txt");
+	cout<<"How to play: \n";
+	while (getline (MyReadFile, myText)) {
+	cout << myText;
+	}
+		MyReadFile.close();
+		char Ans='n';
+	printf("\n\nWant to start playing now ? y|n : ");
+	do{
+		Ans = getchar();
+	} while (Ans!='y' &&Ans!='n');
+	if(Ans=='y'){
+		return 1;
+	}
+	return 0;
+}
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -169,15 +189,12 @@ int Start(void){
 	printf("                  11__1111111111111111111111111111\n");
 	printf("                   111111111111\n");
 	printf("                     111111\n\n\n");
-	char name[200];
-	FILE *fp_htp;
+	string how;
+	ifstream MyReadFile("h.txt");
 	printf("How to play:\n");
-	fp_htp = fopen("h.txt","r");
-	while(feof(fp_htp)==0)
-    	{
-        fscanf(fp_htp,"%s",name);       
-        printf("%s\n",name);
-    	}
+	while (getline (MyReadFile, how)) {
+	cout << how;
+	}
 	char Ans='n';
 	printf("\n\nWant to start playing now ? y|n : ");
 	do{
@@ -460,33 +477,35 @@ int main()
 	clear();
    	char Ans,y,n,Y,N;
 	re:
-	cout<<" _____________________"<<endl;
-	cout<<"|                     |"<<endl;
-	cout<<"|                     |"<<endl;
-	cout<<"|Welcome to mini game.|"<<endl;
-	cout<<"|                     |"<<endl;
-	cout<<"|_____________________|"<<endl;
+	cout<<" _______________________"<<endl;
+	cout<<"|                       |"<<endl;
+	cout<<"|                       |"<<endl;
+	cout<<"|Welcome to Arcade game.|"<<endl;
+	cout<<"|                       |"<<endl;
+	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
    	cout<<" Want to start playing now ? y|n :"; 
     cin>>Ans;
     if(Ans == ('y')||Ans == ('Y')){
 		int Ans=0;
 	    clear();
+	    rech:
 	    cout<<" "<<endl;
 	    cout<<" "<<endl;
 	    cout<<"Choose game         "<<endl;
 	    cout<<"  "<<endl;
-	    cout<<" _____________________"<<endl;
-	    cout<<"|                     |"<<endl;
-	    cout<<"|1.Poker              |"<<endl;	
-	    cout<<"|2.Cross Road         |"<<endl;
-	    cout<<"|_____________________|"<<endl;
+	    cout<<" ______________________________"<<endl;
+	    cout<<"|                              |"<<endl;
+	    cout<<"|1.Poker                       |"<<endl;	
+	    cout<<"|2.The journey of spade        |"<<endl;
+	    cout<<"|3.Exit                        |"<<endl;
+	    cout<<"|______________________________|"<<endl;
+	    cout<<"Please choose 1|2|3:";
 	    int choice;
 	    cin >> choice;
-	    switch (choice)
-	    {
-	    case 1:
-	        clear();
+	    
+	    if(choice == 1){
+	    	clear();
 	        cout<<"This game is Pokergame."<<endl;
 		    Ans=Start();
 		    if(Ans==1){
@@ -501,18 +520,36 @@ int main()
 					main();
 		 		}
 		    }
-	        break;
-	    case 2:
-	        cout<<"This game is CrossRoad game."<<endl;
-	        cGame game(30, 8);
-	        game.Run();
-	        cout << "Game over!" << endl;
-	        getchar();
-	        break;
+		}
+	        
+		if(choice == 2){
+			clear();
+	        cout<<"This game is The journey of spade game."<<endl;
+	    	Ans=Cstart();
+	    	if(Ans==1){
+			clear();
+			cGame game(30, 8);
+			game.Run();
+	        char i='n';
+			printf("Want to play another round y|n :");
+			do{		
+					i = getchar();
+				} while (i!='y' &&i!='n');
+				if(i=='y'){
+					main();
+		 		}
+		    }
 	    }
-	    clear();
-		printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
-		return 0;
+	    if(choice == 3){
+	    	clear();
+			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+			return 0;
+		}
+		else{
+			clear();
+			cout<<"Please input only 1|2|3.!!!"<<endl;
+			goto rech;
+		}   
 	}
     if(Ans == ('n')||Ans == ('N')){
     	cout<<"Bye bye see you next time.!!!"<<endl;
