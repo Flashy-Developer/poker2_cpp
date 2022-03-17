@@ -512,7 +512,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			printf("Want to play another round y|n :");
+			cout<<"Want to play another round y|n :";
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -531,7 +531,7 @@ int main()
 			cGame game(30, 8);
 			game.Run();
 	        char i='n';
-			printf("Want to play another round y|n :");
+			cout<<("Want to play another round y|n :";
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -542,7 +542,7 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+			cout<<"!!!! LET'S PLAY AGAIN NEXT TIME !!!!";
 			return 0;
 		}
 		else{
