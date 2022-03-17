@@ -76,6 +76,7 @@ public:
     }
     void Draw()
     {
+    	char fl[]={06,04};
         clear();
         for (int i = 0; i < numberOfLanes; i++)
         {
@@ -84,9 +85,9 @@ public:
                 if (i == 0 && (j == 0 || j == width - 1)) cout << "S";
                 if (i == numberOfLanes - 1 && (j == 0 || j == width - 1)) cout << "F";
                 if (map[i]->CheckPos(j) && i != 0 && i != numberOfLanes - 1)
-                    cout << "#";
+                    cout << fl[1];
                 else if (player->x == j && player->y == i)
-                    cout << "^";
+                    cout << fl[0];
                 else
                     cout << "_";
             }
@@ -461,16 +462,25 @@ int main()
 	re:
 	cout<<" _____________________"<<endl;
 	cout<<"|                     |"<<endl;
-	cout<<"|Welcome to weed game.|"<<endl;
+	cout<<"|                     |"<<endl;
+	cout<<"|Welcome to mini game.|"<<endl;
+	cout<<"|                     |"<<endl;
 	cout<<"|_____________________|"<<endl;
-   	cout<<"Want to start playing now ? y|n :"; 
+	cout<<" "<<endl;
+   	cout<<" Want to start playing now ? y|n :"; 
     cin>>Ans;
     if(Ans == ('y')||Ans == ('Y')){
 		int Ans=0;
 	    clear();
-	    cout<<"Choose game"<<endl;
-	    cout<<"1.Poker"<<endl;
-	    cout<<"2.Cross Road"<<endl;
+	    cout<<" "<<endl;
+	    cout<<" "<<endl;
+	    cout<<"Choose game         "<<endl;
+	    cout<<"  "<<endl;
+	    cout<<" _____________________"<<endl;
+	    cout<<"|                     |"<<endl;
+	    cout<<"|1.Poker              |"<<endl;	
+	    cout<<"|2.Cross Road         |"<<endl;
+	    cout<<"|_____________________|"<<endl;
 	    int choice;
 	    cin >> choice;
 	    switch (choice)
