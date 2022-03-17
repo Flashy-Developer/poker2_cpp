@@ -1,0 +1,3 @@
+Give_card_to_player_2_card_and_take_number_on_card_to_plus_and_check_who_is_highest.
+If_sum_is_lessthan_or_equal_7_can_take_thirdcard. 
+If_sum_is_more_than_9_count_only_digit.
