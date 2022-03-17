@@ -19,76 +19,65 @@ int Cstart(void);
 void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
-class cPlayer
+class Player_2
 {
 public:
     int x, y;
-    cPlayer(int width, int numberOfLanes) { x = width / 2; y = numberOfLanes - 1 ; }
+    Player_2(int width, int high) { x = width / 2; y = high - 1 ; }
 };
-class cLane
+class La
 {
 private:
-    deque<bool> cars;
+    deque<bool> obstruction;
     bool right;
 public:
-    cLane(int width)
+    La(int width)
     {
         for (int i = 0; i < width; i++)
-            cars.push_front(true);
+            obstruction.push_front(true);
         right = rand() % 2;
     }
-    void Move()
-    {
-        if (right)
-        {
-            if (rand() % 20 == 1)
-                cars.push_front(true);
+    void Move(){
+        
+            if (rand() % 5 == 1)
+                obstruction.push_back(true);
             else
-                cars.push_front(false);
-            cars.pop_back();
-        }
-        else
-        {
-            if (rand() % 20 == 1)
-                cars.push_back(true);
-            else
-                cars.push_back(false);
-            cars.pop_front();
-        }
+                obstruction.push_back(false);
+            obstruction.pop_front();
     }
-    bool CheckPos(int pos) { return cars[pos]; }
+    bool CheckPos(int pos) { return obstruction[pos]; }
 };
-class cGame{
+class Playgame_2{
 private:
     bool quit;
-    int numberOfLanes;
+    int high;
     int width;
     int score;
-    cPlayer * player;
-    vector<cLane*> map;
+    Player_2 * py_2;
+    vector<La*> map;
 public:
-    cGame(int w , int h )
+    Playgame_2(int w , int h )
     {
-        numberOfLanes = h;
+        high = h;
         width = w;
         quit = false;
-        for (int i = 0; i < numberOfLanes; i++)
-            map.push_back(new cLane(width));
-        player = new cPlayer(width,numberOfLanes);
+        for (int i = 0; i < high; i++)
+            map.push_back(new La(width));
+        py_2 = new Player_2(width,high);
     }
-    void Draw()
+    void Dw_()
     {
     	char fl[]={06,04};
         clear();
-        for (int i = 0; i < numberOfLanes; i++)
+        for (int i = 0; i < high; i++)
         {
             for (int j = 0; j < width; j++)
             {
-                if (i == 0 && (j == 0 || j == width - 1)) cout << "F";
-                if (i == numberOfLanes - 1 && (j == 0 || j == width - 1)) cout << "S";
-                if (map[i]->CheckPos(j) && i != 0 && i != numberOfLanes - 1)
+                if (i == 0 && (j == 0 || j == width - 1)) cout << "S";
+                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "F";
+                if (map[i]->CheckPos(j) && i != 0 && i != high - 1)
                     cout << fl[1];
-                else if (player->x == j && player->y == i)
+                else if (py_2->x == j && py_2->y == i)
                     cout << fl[0];
                 else
                     cout << "_";
@@ -97,43 +86,43 @@ public:
         }
         cout << "Score : " << score << endl;
     }
-    void Input()
+    void keyboard()
     {
         if (kbhit())
         {
             char current = getch();
             if (current == 'a')
-                player->x--;
+                py_2->x--;
             if (current == 'd')
-                player->x++;
+                py_2->x++;
             if (current == 'w')
-                player->y--;
+                py_2->y--;
             if (current == 's')
-                player->y++;
+                py_2->y++;
         }
     }
-    void Logic()
+    void wot()
     {
-        for (int i = 1; i < numberOfLanes - 1; i++)
+        for (int i = 1; i < high - 1; i++)
         {
             if (rand() % 5 == 1)
                 map[i]->Move();
-            if (map[i]->CheckPos(player->x) && player->y == i)
+            if (map[i]->CheckPos(py_2->x) && py_2->y == i)
                 quit = true;
         }
-        if (player->y == numberOfLanes%numberOfLanes)
+        if (py_2->y == high%high)
         {
             score++;
-            player->y = numberOfLanes - 1 ;
+            py_2->y = high - 1 ;
         }
     }
     void Run()
     {
         while (!quit)
         {
-            Input();
-            Draw();
-            Logic();
+            keyboard();
+            Dw_();
+            wot();
         }
     }
 };
@@ -153,7 +142,7 @@ int Cstart(void){
 	if(Ans=='y'){
 		return 1;
 	}
-	return 0;
+    return 0;
 }
 int Start(void){
 	printf("                       1111___11111\n");
@@ -189,12 +178,15 @@ int Start(void){
 	printf("                  11__1111111111111111111111111111\n");
 	printf("                   111111111111\n");
 	printf("                     111111\n\n\n");
-	string how;
-	ifstream MyReadFile("h.txt");
+	char name[200];
+	FILE *fp_htp;
 	printf("How to play:\n");
-	while (getline (MyReadFile, how)) {
-	cout << how;
-	}
+	fp_htp = fopen("h.txt","r");
+	while(feof(fp_htp)==0)
+    	{
+        fscanf(fp_htp,"%s",name);       
+        printf("%s\n",name);
+    	}
 	char Ans='n';
 	printf("\n\nWant to start playing now ? y|n : ");
 	do{
@@ -499,7 +491,7 @@ int main()
 	    cout<<"|1.Poker                       |"<<endl;	
 	    cout<<"|2.The journey of spade        |"<<endl;
 	    cout<<"|3.Exit                        |"<<endl;
-	    cout<<"|______________________________|"<<endl;
+		cout<<"|______________________________|"<<endl;
 	    cout<<"Please choose 1|2|3:";
 	    int choice;
 	    cin >> choice;
@@ -512,7 +504,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			cout<<"Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -528,10 +520,10 @@ int main()
 	    	Ans=Cstart();
 	    	if(Ans==1){
 			clear();
-			cGame game(30, 8);
+			Playgame_2 game(30, 8);
 			game.Run();
 	        char i='n';
-			cout<<("Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -542,7 +534,7 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			cout<<"!!!! LET'S PLAY AGAIN NEXT TIME !!!!";
+			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
 		else{
