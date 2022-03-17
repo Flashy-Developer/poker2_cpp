@@ -1,0 +1,2 @@
+use w,a,s,d move character pass the line to finnish but not hit the block if hit the block game will over.
+        
