@@ -38,7 +38,7 @@ public:
     {
         if (right)
         {
-            if (rand() % 10 == 1)
+            if (rand() % 5 == 1)
                 cars.push_front(true);
             else
                 cars.push_front(false);
@@ -46,19 +46,17 @@ public:
         }
         else
         {
-            if (rand() % 10 == 1)
+            if (rand() % 5 == 1)
                 cars.push_back(true);
             else
                 cars.push_back(false);
             cars.pop_front();
         }
-        
     }
     bool CheckPos(int pos) { return cars[pos]; }
     void ChangeDirection() { right = !right; }
 };
-class cGame
-{
+class cGame{
 private:
     bool quit;
     int numberOfLanes;
@@ -67,7 +65,7 @@ private:
     cPlayer * player;
     vector<cLane*> map;
 public:
-    cGame(int w = 20, int h = 10)
+    cGame(int w , int h )
     {
         numberOfLanes = h;
         width = w;
@@ -76,19 +74,9 @@ public:
             map.push_back(new cLane(width));
         player = new cPlayer(width);
     }
-    ~cGame()
-    {
-        delete player;
-        for (int i = 0; i < map.size(); i++)
-        {
-            cLane * current = map.back();
-            map.pop_back();
-            delete current;
-        }
-    }
     void Draw()
     {
-        system("cls");
+        clear();
         for (int i = 0; i < numberOfLanes; i++)
         {
             for (int j = 0; j < width; j++)
@@ -100,7 +88,7 @@ public:
                 else if (player->x == j && player->y == i)
                     cout << "V";
                 else
-                    cout << " ";
+                    cout << "_";
             }
             cout << endl;
         }
@@ -127,7 +115,7 @@ public:
     {
         for (int i = 1; i < numberOfLanes - 1; i++)
         {
-            if (rand() % 10 == 1)
+            if (rand() % 2 == 1)
                 map[i]->Move();
             if (map[i]->CheckPos(player->x) && player->y == i)
                 quit = true;
@@ -153,11 +141,11 @@ public:
 int main()
 {
    	char Ans,y,n,Y,N;
+	re:
 	cout<<" _____________________"<<endl;
 	cout<<"|                     |"<<endl;
 	cout<<"|Welcome to weed game.|"<<endl;
 	cout<<"|_____________________|"<<endl;
-	re:
    	cout<<"Want to start playing now ? y|n :"; 
     cin>>Ans;
     if(Ans == ('y')||Ans == ('Y')){
@@ -189,8 +177,7 @@ int main()
 	        break;
 	    case 2:
 	        cout<<"This game is CrossRoad game."<<endl;
-	        srand(time(NULL));
-	        cGame game(30, 5);
+	        cGame game(30, 8);
 	        game.Run();
 	        cout << "Game over!" << endl;
 	        getchar();
