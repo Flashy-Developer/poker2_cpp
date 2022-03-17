@@ -13,6 +13,17 @@
 #define clear()    system("clear")
 #endif
 using namespace std;
+double discount(double score1) {
+   	return score1;
+}	
+
+double discount(double score1, double score2) {
+    return score1 + score2;
+}
+
+double discount(double score1, double score2, double score3) {
+    return score1 + score2 + score3;
+}
 int Start(void);
 int Cstart(void);
 void Playgame(void);
@@ -88,17 +99,6 @@ int Cstart(void){
 		return 1;
 	}
     return 0;
-}
-double discount(double score1) {
-   	return score1;
-}	
-
-double discount(double score1, double score2) {
-    return score1 + score2;
-}
-
-double discount(double score1, double score2, double score3) {
-    return score1 + score2 + score3;
 }
 int Start(void){
 	printf("                       1111___11111\n");
@@ -494,7 +494,7 @@ int main()
 {
 	round round1;
 	clear();
-   	char Ans,y,n,Y,N;
+   	char input,y,n,Y,N;
 	re:
 	cout<<" _______________________"<<endl;
 	cout<<"|                       |"<<endl;
@@ -504,8 +504,8 @@ int main()
 	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
    	round1.want(); 
-    cin>>Ans;
-    if(Ans == ('y')||Ans == ('Y')){
+    cin>>input;
+    if(input == ('y')||input == ('Y')){
 		int Ans=0;
 	    clear();
 	    rech:
@@ -565,21 +565,13 @@ int main()
 	    	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
-		if(choice == 4){
-	    	clear();
-			cout << "\tScore Record" << endl;
-   			cout << discount(12492) << endl;
-    		cout << discount(12492, 1425) << endl;
-    		cout << discount(12492, 1425, 14257) << endl;
-    		return 0;
-		}
 		else{
 			clear();
 			cout<<"Please input only 1|2|3|4.!!!"<<endl;
 			goto rech;
 		}   
 	}
-    if(Ans == ('n')||Ans == ('N')){
+    if(input == ('n')||input == ('N')){
     	cout<<"Bye bye see you next time.!!!"<<endl;
 	}
 	else{
