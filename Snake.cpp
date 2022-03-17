@@ -5,6 +5,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fstream>
+#include <string>
 
 #ifdef _WIN32
 #define clear()    system("cls")
@@ -13,10 +15,12 @@
 #endif
 using namespace std;
 int Start(void);
+int Cstart(void);
 void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
 class cPlayer
+
 {
 public:
     int x, y;
@@ -65,7 +69,7 @@ private:
     cPlayer * player;
     vector<cLane*> map;
 public:
-    cGame(int w , int h )
+	cGame(int w , int h )
     {
         numberOfLanes = h;
         width = w;
@@ -74,7 +78,7 @@ public:
             map.push_back(new cLane(width));
         player = new cPlayer(width);
     }
-    void Draw()
+	void Draw()
     {
         clear();
         for (int i = 0; i < numberOfLanes; i++)
@@ -128,7 +132,8 @@ public:
             map[rand() % numberOfLanes]->ChangeDirection();
         }
     }
-    void Run()
+    
+	void Run()
     {
         while (!quit)
         {
@@ -138,66 +143,24 @@ public:
         }
     }
 };
-int main()
-{
-   	char Ans,y,n,Y,N;
-	re:
-	cout<<" _____________________"<<endl;
-	cout<<"|                     |"<<endl;
-	cout<<"|Welcome to weed game.|"<<endl;
-	cout<<"|_____________________|"<<endl;
-   	cout<<"Want to start playing now ? y|n :"; 
-    cin>>Ans;
-    if(Ans == ('y')||Ans == ('Y')){
-		int Ans=0;
-	    clear();
-	    cout<<"Choose game"<<endl;
-	    cout<<"1.Poker"<<endl;
-	    cout<<"2.Cross Road"<<endl;
-	    int choice;
-	    cin >> choice;
-	    switch (choice)
-	    {
-	    case 1:
-	        clear();
-	        cout<<"This game is Pokergame."<<endl;
-		    Ans=Start();
-		    if(Ans==1){
-			clear();
-			Playgame();
-			char i='n';
-			printf("Want to play another round y|n :");
-			do{		
-					i = getchar();
-				} while (i!='y' &&i!='n');
-				if(i=='y'){
-					main();
-		 		}
-		    }
-	        break;
-	    case 2:
-	        cout<<"This game is CrossRoad game."<<endl;
-	        cGame game(30, 8);
-	        game.Run();
-	        cout << "Game over!" << endl;
-	        getchar();
-	        break;
-	    }
-	    clear();
-		printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
-		return 0;
+int Cstart(void){
+	string myText;
+	ifstream MyReadFile("crh.txt");
+	cout<<"How to play: \n";
+	while (getline (MyReadFile, myText)) {
+	cout << myText;
 	}
-    if(Ans == ('n')||Ans == ('N')){
-    	cout<<"Bye bye see you next time.!!!"<<endl;
+		MyReadFile.close();
+		char Ans='n';
+	printf("\n\nWant to start playing now ? y|n : ");
+	do{
+		Ans = getchar();
+	} while (Ans!='y' &&Ans!='n');
+	if(Ans=='y'){
+		return 1;
 	}
-	else{
-    	clear();
-		cout<<"Please input y|n.!!!"<<endl;
-		goto re;
-	}
-	
-}
-
+	return 0;
+	}	
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -516,5 +479,73 @@ void Piccard(int num)
 			printf("|_______|\n");
 			break;
 		}
+	}
+}
+int main(){
+	char Ans,y,n,Y,N;
+	re:
+	cout<<" _____________________"<<endl;
+	cout<<"|                     |"<<endl;
+	cout<<"|Welcome to weed game.|"<<endl;
+	cout<<"|_____________________|"<<endl;
+   	cout<<"Want to start playing now ? y|n :"; 
+    cin>>Ans;
+    if(Ans == ('y')||Ans == ('Y')){
+		int Ans=0;
+	    clear();
+	    cout<<"Choose game"<<endl;
+	    cout<<"1.Poker"<<endl;
+	    cout<<"2.Cross Road"<<endl;
+	    int choice;
+	    cin >> choice;
+	    switch (choice)
+	    {
+	    case 1:
+	        clear();
+	        cout<<"This game is Pokergame."<<endl;
+		    Ans=Start();
+		    if(Ans==1){
+			clear();
+			Playgame();
+			char i='n';
+			printf("Want to play another round y|n :");
+			do{		
+					i = getchar();
+				} while (i!='y' &&i!='n');
+				if(i=='y'){
+					main();
+		 		}
+		    }
+	        break;
+	    case 2:
+	        clear();
+	        cout<<"This game is CrossRoad game."<<endl;
+	    	Ans=Cstart();
+	    	if(Ans==1){
+			clear();
+			cGame game(30, 8);
+			game.Run();
+	        char i='n';
+			printf("Want to play another round y|n :");
+			do{		
+					i = getchar();
+				} while (i!='y' &&i!='n');
+				if(i=='y'){
+					main();
+		 		}
+		    }
+	        break;
+	    }
+	    clear();
+		printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+		return 0;
+	}
+    if(Ans == ('n')||Ans == ('N')){
+    	cout<<"Bye bye see you next time.!!!"<<endl;
+	}
+	else{
+    	clear();
+		cout<<"Please input y|n.!!!"<<endl;
+		goto re;
 	}
 }
