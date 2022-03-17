@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
-
 #ifdef _WIN32
 #define clear()    system("cls")
 #else
@@ -53,21 +52,20 @@ private:
     bool quit;
     int high;
     int width;
+    int score;
     Player_2 * py_2;
     vector<La*> map;
 public:
-
     Playgame_2(int w , int h )
     {
         high = h;
         width = w;
         quit = false;
-        int score;
         for (int i = 0; i < high; i++)
             map.push_back(new La(width));
         py_2 = new Player_2(width,high);
     }
-    void Dw_();
+        void Dw_();
     void keyboard();
     void wot();
     void Run();
@@ -125,26 +123,24 @@ int Start(void){
 	printf("                  11__1111111111111111111111111111\n");
 	printf("                   111111111111\n");
 	printf("                     111111\n\n\n");
-	char name[200];
-	FILE *fp_htp;
-	printf("How to play:\n");
-	fp_htp = fopen("h.txt","r");
-	while(feof(fp_htp)==0)
-    	{
-        fscanf(fp_htp,"%s",name);       
-        printf("%s\n",name);
-    	}
-	char Ans='n';
+	
+	string how;
+	ifstream MyReadFile("h.txt");
+	cout<<"How to play: \n";
+	while (getline (MyReadFile, how)) {
+	cout << how;
+	}
+		MyReadFile.close();
+		char Ans='n';
 	printf("\n\nWant to start playing now ? y|n : ");
 	do{
-			Ans = getchar();
-		} while (Ans!='y' &&Ans!='n');
-		if(Ans=='y'){
-			return 1;
+		Ans = getchar();
+	} while (Ans!='y' &&Ans!='n');
+	if(Ans=='y'){
+		return 1;
 	}
-	return 0;
+    return 0;
 }
-
 void Playgame(void){
 	typedef struct{
 		int Pycards[3];
@@ -493,16 +489,17 @@ int main()
 	    cout<<" "<<endl;
 	    cout<<"Choose game         "<<endl;
 	    cout<<"  "<<endl;
-	    cout<<" ______________________________"<<endl;
-	    cout<<"|                              |"<<endl;
-	    cout<<"|1.Poker                       |"<<endl;	
-	    cout<<"|2.The journey of spade        |"<<endl;
-	    cout<<"|3.Exit                        |"<<endl;
-		cout<<"|______________________________|"<<endl;
-	    cout<<"Please choose 1|2|3:";
+	    cout<<" __________________________________________"<<endl;
+	    cout<<"|                                          |"<<endl;
+	    cout<<"|1.Poker                                   |"<<endl;	
+	    cout<<"|2.The journey of spade                    |"<<endl;
+	    cout<<"|3.Exit                                    |"<<endl;
+	    cout<<"|4.Check score The journey of spade        |"<<endl;
+	    cout<<"|__________________________________________|"<<endl;
+	    cout<<"Please choose 1|2|3|4:";
 	    int choice;
 	    cin >> choice;
-	    
+
 	    if(choice == 1){
 	    	clear();
 	        cout<<"This game is Pokergame."<<endl;
@@ -529,9 +526,8 @@ int main()
 			clear();
 			Playgame_2 game(30, 8);
 			game.Run();
-            Playgame_2 game(score);
 	        char i='n';
-			printf("Want to play another round y|n :");
+	        printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -542,12 +538,17 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+	    	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+			return 0;
+		}
+		if(choice == 4){
+	    	clear();
+
 			return 0;
 		}
 		else{
 			clear();
-			cout<<"Please input only 1|2|3.!!!"<<endl;
+			cout<<"Please input only 1|2|3|4.!!!"<<endl;
 			goto rech;
 		}   
 	}
