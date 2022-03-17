@@ -500,7 +500,7 @@ int main()
 	string playername;
 	round round1;
 	clear();
-   	char Ans,y,n,Y,N;
+   	char in,y,n,Y,N;
 	re:
 	cout<<" _______________________"<<endl;
 	cout<<"|                       |"<<endl;
@@ -510,8 +510,8 @@ int main()
 	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
    	round1.want(); 
-    cin>>Ans;
-    if(Ans == ('y')||Ans == ('Y')){
+    cin>>in;
+    if(in == ('y')||in == ('Y')){
 		int Ans=0;
 	    clear();
 	    rech:
@@ -589,7 +589,7 @@ int main()
 			goto rech;
 		}   
 	}
-    if(Ans == ('n')||Ans == ('N')){
+    if(in == ('n')||in == ('N')){
     	cout<<"Bye bye see you next time.!!!"<<endl;
 	}
 	else{
