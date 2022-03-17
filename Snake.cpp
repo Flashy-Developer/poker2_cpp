@@ -492,13 +492,14 @@ int main()
 	    cout<<" "<<endl;
 	    cout<<"Choose game         "<<endl;
 	    cout<<"  "<<endl;
-	    cout<<" ______________________________"<<endl;
-	    cout<<"|                              |"<<endl;
-	    cout<<"|1.Poker                       |"<<endl;	
-	    cout<<"|2.The journey of spade        |"<<endl;
-	    cout<<"|3.Exit                        |"<<endl;
-		cout<<"|______________________________|"<<endl;
-	    cout<<"Please choose 1|2|3:";
+	    cout<<" __________________________________________"<<endl;
+	    cout<<"|                                          |"<<endl;
+	    cout<<"|1.Poker                                   |"<<endl;	
+	    cout<<"|2.The journey of spade                    |"<<endl;
+	    cout<<"|3.Exit                                    |"<<endl;
+	    cout<<"|4.Check score The journey of spade        |"<<endl;
+	    cout<<"|__________________________________________|"<<endl;
+	    cout<<"Please choose 1|2|3|4:";
 	    int choice;
 	    cin >> choice;
 	    
@@ -510,7 +511,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			printf("Want to play another round y|n :");
+			cout<<"Want to play another round y|n :";
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -526,10 +527,10 @@ int main()
 	    	Ans=Cstart();
 	    	if(Ans==1){
 			clear();
-			Playgame_2 game(30, 8);
+			cGame game(30, 8);
 			game.Run();
 	        char i='n';
-			printf("Want to play another round y|n :");
+			cout<<"Want to play another round y|n :";
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -540,12 +541,17 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
+			cout<<"!!!! LET'S PLAY AGAIN NEXT TIME !!!!";
+			return 0;
+		}
+		if(choice == 4){
+	    	clear();
+			
 			return 0;
 		}
 		else{
 			clear();
-			cout<<"Please input only 1|2|3.!!!"<<endl;
+			cout<<"Please input only 1|2|3|4.!!!"<<endl;
 			goto rech;
 		}   
 	}
