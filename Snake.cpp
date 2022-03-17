@@ -53,15 +53,16 @@ private:
     bool quit;
     int high;
     int width;
-    int score;
     Player_2 * py_2;
     vector<La*> map;
 public:
+
     Playgame_2(int w , int h )
     {
         high = h;
         width = w;
         quit = false;
+        int score;
         for (int i = 0; i < high; i++)
             map.push_back(new La(width));
         py_2 = new Player_2(width,high);
@@ -492,14 +493,13 @@ int main()
 	    cout<<" "<<endl;
 	    cout<<"Choose game         "<<endl;
 	    cout<<"  "<<endl;
-	    cout<<" __________________________________________"<<endl;
-	    cout<<"|                                          |"<<endl;
-	    cout<<"|1.Poker                                   |"<<endl;	
-	    cout<<"|2.The journey of spade                    |"<<endl;
-	    cout<<"|3.Exit                                    |"<<endl;
-	    cout<<"|4.Check score The journey of spade        |"<<endl;
-	    cout<<"|__________________________________________|"<<endl;
-	    cout<<"Please choose 1|2|3|4:";
+	    cout<<" ______________________________"<<endl;
+	    cout<<"|                              |"<<endl;
+	    cout<<"|1.Poker                       |"<<endl;	
+	    cout<<"|2.The journey of spade        |"<<endl;
+	    cout<<"|3.Exit                        |"<<endl;
+		cout<<"|______________________________|"<<endl;
+	    cout<<"Please choose 1|2|3:";
 	    int choice;
 	    cin >> choice;
 	    
@@ -511,7 +511,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			cout<<"Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -527,10 +527,11 @@ int main()
 	    	Ans=Cstart();
 	    	if(Ans==1){
 			clear();
-			cGame game(30, 8);
+			Playgame_2 game(30, 8);
 			game.Run();
+            Playgame_2 game(score);
 	        char i='n';
-			cout<<"Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -541,17 +542,12 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			cout<<"!!!! LET'S PLAY AGAIN NEXT TIME !!!!";
-			return 0;
-		}
-		if(choice == 4){
-	    	clear();
-			
+			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
 		else{
 			clear();
-			cout<<"Please input only 1|2|3|4.!!!"<<endl;
+			cout<<"Please input only 1|2|3.!!!"<<endl;
 			goto rech;
 		}   
 	}
