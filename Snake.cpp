@@ -5,8 +5,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <fstream>
-#include <string>
 
 #ifdef _WIN32
 #define clear()    system("cls")
@@ -20,11 +18,10 @@ void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
 class cPlayer
-
 {
 public:
     int x, y;
-    cPlayer(int width) { x = width / 2; y = 0; }
+    cPlayer(int width, int numberOfLanes) { x = width / 2; y = numberOfLanes - 1 ; }
 };
 class cLane
 {
@@ -42,7 +39,7 @@ public:
     {
         if (right)
         {
-            if (rand() % 5 == 1)
+            if (rand() % 20 == 1)
                 cars.push_front(true);
             else
                 cars.push_front(false);
@@ -50,7 +47,7 @@ public:
         }
         else
         {
-            if (rand() % 5 == 1)
+            if (rand() % 20 == 1)
                 cars.push_back(true);
             else
                 cars.push_back(false);
@@ -58,7 +55,6 @@ public:
         }
     }
     bool CheckPos(int pos) { return cars[pos]; }
-    void ChangeDirection() { right = !right; }
 };
 class cGame{
 private:
@@ -69,16 +65,16 @@ private:
     cPlayer * player;
     vector<cLane*> map;
 public:
-	cGame(int w , int h )
+    cGame(int w , int h )
     {
         numberOfLanes = h;
         width = w;
         quit = false;
         for (int i = 0; i < numberOfLanes; i++)
             map.push_back(new cLane(width));
-        player = new cPlayer(width);
+        player = new cPlayer(width,numberOfLanes);
     }
-	void Draw()
+    void Draw()
     {
         clear();
         for (int i = 0; i < numberOfLanes; i++)
@@ -90,13 +86,13 @@ public:
                 if (map[i]->CheckPos(j) && i != 0 && i != numberOfLanes - 1)
                     cout << "#";
                 else if (player->x == j && player->y == i)
-                    cout << "V";
+                    cout << "^";
                 else
                     cout << "_";
             }
             cout << endl;
         }
-        cout << "Score: " << score << endl;
+        cout << "Score : " << score << endl;
     }
     void Input()
     {
@@ -111,29 +107,24 @@ public:
                 player->y--;
             if (current == 's')
                 player->y++;
-            if (current == 'q')
-                quit = true;
         }
     }
     void Logic()
     {
         for (int i = 1; i < numberOfLanes - 1; i++)
         {
-            if (rand() % 2 == 1)
+            if (rand() % 5 == 1)
                 map[i]->Move();
             if (map[i]->CheckPos(player->x) && player->y == i)
                 quit = true;
         }
-        if (player->y == numberOfLanes - 1)
+        if (player->y == numberOfLanes%numberOfLanes)
         {
             score++;
-            player->y = 0;
-            cout << "\x07";
-            map[rand() % numberOfLanes]->ChangeDirection();
+            player->y = numberOfLanes - 1 ;
         }
     }
-    
-	void Run()
+    void Run()
     {
         while (!quit)
         {
@@ -143,24 +134,6 @@ public:
         }
     }
 };
-int Cstart(void){
-	string myText;
-	ifstream MyReadFile("crh.txt");
-	cout<<"How to play: \n";
-	while (getline (MyReadFile, myText)) {
-	cout << myText;
-	}
-		MyReadFile.close();
-		char Ans='n';
-	printf("\n\nWant to start playing now ? y|n : ");
-	do{
-		Ans = getchar();
-	} while (Ans!='y' &&Ans!='n');
-	if(Ans=='y'){
-		return 1;
-	}
-	return 0;
-	}	
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -481,8 +454,10 @@ void Piccard(int num)
 		}
 	}
 }
-int main(){
-	char Ans,y,n,Y,N;
+int main()
+{
+	clear();
+   	char Ans,y,n,Y,N;
 	re:
 	cout<<" _____________________"<<endl;
 	cout<<"|                     |"<<endl;
@@ -518,22 +493,11 @@ int main(){
 		    }
 	        break;
 	    case 2:
-	        clear();
 	        cout<<"This game is CrossRoad game."<<endl;
-	    	Ans=Cstart();
-	    	if(Ans==1){
-			clear();
-			cGame game(30, 8);
-			game.Run();
-	        char i='n';
-			printf("Want to play another round y|n :");
-			do{		
-					i = getchar();
-				} while (i!='y' &&i!='n');
-				if(i=='y'){
-					main();
-		 		}
-		    }
+	        cGame game(30, 8);
+	        game.Run();
+	        cout << "Game over!" << endl;
+	        getchar();
 	        break;
 	    }
 	    clear();
