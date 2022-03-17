@@ -536,7 +536,7 @@ int main()
 		 		}
 		    }
 	    }
-	    if(choice == 3){
+	     if(choice == 3){
 	    	clear();
 	    	printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
