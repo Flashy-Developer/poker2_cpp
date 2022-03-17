@@ -19,6 +19,7 @@ int Cstart(void);
 void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
+
 class Player_2
 {
 public:
@@ -65,67 +66,12 @@ public:
             map.push_back(new La(width));
         py_2 = new Player_2(width,high);
     }
-    void Dw_()
-    {
-    	char fl[]={06,04};
-        clear();
-        for (int i = 0; i < high; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                if (i == 0 && (j == 0 || j == width - 1)) cout << "S";
-                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "F";
-                if (map[i]->CheckPos(j) && i != 0 && i != high - 1)
-                    cout << fl[1];
-                else if (py_2->x == j && py_2->y == i)
-                    cout << fl[0];
-                else
-                    cout << "_";
-            }
-            cout << endl;
-        }
-        cout << "Score : " << score << endl;
-    }
-    void keyboard()
-    {
-        if (kbhit())
-        {
-            char current = getch();
-            if (current == 'a')
-                py_2->x--;
-            if (current == 'd')
-                py_2->x++;
-            if (current == 'w')
-                py_2->y--;
-            if (current == 's')
-                py_2->y++;
-        }
-    }
-    void wot()
-    {
-        for (int i = 1; i < high - 1; i++)
-        {
-            if (rand() % 5 == 1)
-                map[i]->Move();
-            if (map[i]->CheckPos(py_2->x) && py_2->y == i)
-                quit = true;
-        }
-        if (py_2->y == high%high)
-        {
-            score++;
-            py_2->y = high - 1 ;
-        }
-    }
-    void Run()
-    {
-        while (!quit)
-        {
-            keyboard();
-            Dw_();
-            wot();
-        }
-    }
+    void Dw_();
+    void keyboard();
+    void wot();
+    void Run();
 };
+
 int Cstart(void){
 	string myText;
 	ifstream MyReadFile("crh.txt");
@@ -361,7 +307,6 @@ void Playgame(void){
 		}		
 	}
 }
-
 void Shuffcard(int cards[])
 {
 	int t;
@@ -380,7 +325,6 @@ void Shuffcard(int cards[])
 		desk[t] = 0;
 	}
 }
-
 void Piccard(int num)
 {
 	char fl;
@@ -464,6 +408,68 @@ void Piccard(int num)
 		}
 	}
 }
+
+void Playgame_2::Dw_()
+    {
+    	char fl[]={06,04};
+        clear();
+        for (int i = 0; i < high; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (i == 0 && (j == 0 || j == width - 1)) cout << "S";
+                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "F";
+                if (map[i]->CheckPos(j) && i != 0 && i != high - 1)
+                    cout << fl[1];
+                else if (py_2->x == j && py_2->y == i)
+                    cout << fl[0];
+                else
+                    cout << "_";
+            }
+            cout << endl;
+        }
+        cout << "Score : " << score << endl;
+    }
+void Playgame_2::keyboard()
+    {
+        if (kbhit())
+        {
+            char current = getch();
+            if (current == 'a')
+                py_2->x--;
+            if (current == 'd')
+                py_2->x++;
+            if (current == 'w')
+                py_2->y--;
+            if (current == 's')
+                py_2->y++;
+        }
+    }
+void Playgame_2::wot()
+    {
+        for (int i = 1; i < high - 1; i++)
+        {
+            if (rand() % 5 == 1)
+                map[i]->Move();
+            if (map[i]->CheckPos(py_2->x) && py_2->y == i)
+                quit = true;
+        }
+        if (py_2->y == high%high)
+        {
+            score++;
+            py_2->y = high - 1 ;
+        }
+    }
+void Playgame_2::Run()
+    {
+        while (!quit)
+        {
+            keyboard();
+            Dw_();
+            wot();
+        }
+    }
+
 int main()
 {
 	clear();
@@ -486,14 +492,13 @@ int main()
 	    cout<<" "<<endl;
 	    cout<<"Choose game         "<<endl;
 	    cout<<"  "<<endl;
-	    cout<<" __________________________________________"<<endl;
-	    cout<<"|                                          |"<<endl;
-	    cout<<"|1.Poker                                   |"<<endl;	
-	    cout<<"|2.The journey of spade                    |"<<endl;
-	    cout<<"|3.Exit                                    |"<<endl;
-	    cout<<"|4.Check score The journey of spade        |"<<endl;
-	    cout<<"|__________________________________________|"<<endl;
-	    cout<<"Please choose 1|2|3|4:";
+	    cout<<" ______________________________"<<endl;
+	    cout<<"|                              |"<<endl;
+	    cout<<"|1.Poker                       |"<<endl;	
+	    cout<<"|2.The journey of spade        |"<<endl;
+	    cout<<"|3.Exit                        |"<<endl;
+		cout<<"|______________________________|"<<endl;
+	    cout<<"Please choose 1|2|3:";
 	    int choice;
 	    cin >> choice;
 	    
@@ -505,7 +510,7 @@ int main()
 			clear();
 			Playgame();
 			char i='n';
-			cout<<"Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -521,10 +526,10 @@ int main()
 	    	Ans=Cstart();
 	    	if(Ans==1){
 			clear();
-			cGame game(30, 8);
+			Playgame_2 game(30, 8);
 			game.Run();
 	        char i='n';
-			cout<<"Want to play another round y|n :";
+			printf("Want to play another round y|n :");
 			do{		
 					i = getchar();
 				} while (i!='y' &&i!='n');
@@ -535,17 +540,12 @@ int main()
 	    }
 	    if(choice == 3){
 	    	clear();
-			cout<<"!!!! LET'S PLAY AGAIN NEXT TIME !!!!";
-			return 0;
-		}
-		if(choice == 4){
-	    	clear();
-			
+			printf("!!!! LET'S PLAY AGAIN NEXT TIME !!!!");
 			return 0;
 		}
 		else{
 			clear();
-			cout<<"Please input only 1|2|3|4.!!!"<<endl;
+			cout<<"Please input only 1|2|3.!!!"<<endl;
 			goto rech;
 		}   
 	}
