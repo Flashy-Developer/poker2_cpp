@@ -18,7 +18,18 @@ int Cstart(void);
 void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
-
+class question {
+   public:
+    void want() {
+        cout << "Want to start playing now ? y|n :" << endl;
+    }
+};
+class round : public question {
+	public:
+    void another() {
+        cout << "Want to play another round y|n :" << endl;
+    }
+};
 class Player_2
 {
 public:
@@ -104,6 +115,7 @@ double discount(double score1, double score2) {
 double discount(double score1, double score2, double score3) {
     return score1 - score2 - score3;
 }
+
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -429,8 +441,8 @@ void Playgame_2::Dw_()
         {
             for (int j = 0; j < width; j++)
             {
-                if (i == 0 && (j == 0 || j == width - 1)) cout << "S";
-                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "F";
+                if (i == 0 && (j == 0 || j == width - 1)) cout << "F";
+                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "S";
                 if (map[i]->CheckPos(j) && i != 0 && i != high - 1)
                     cout << fl[1];
                 else if (py_2->x == j && py_2->y == i)
@@ -481,26 +493,15 @@ void Playgame_2::Run()
             wot();
         }
     }
-class question {
-   public:
-    void want() {
-        cout << "Want to start playing now ? y|n :" << endl;
-    }
-};
-class round : public question {
-	public:
-    void another() {
-        cout << "Want to play another round y|n :" << endl;
-    }
-};
+
 
 int main()
 {
-	int score;
+	int scr;
 	string playername;
 	round round1;
 	clear();
-   	char in,y,n,Y,N;
+   	char Ans,y,n,Y,N;
 	re:
 	cout<<" _______________________"<<endl;
 	cout<<"|                       |"<<endl;
@@ -510,8 +511,8 @@ int main()
 	cout<<"|_______________________|"<<endl;
 	cout<<" "<<endl;
    	round1.want(); 
-    cin>>in;
-    if(in == ('y')||in == ('Y')){
+    cin>>Ans;
+    if(Ans == ('y')||Ans == ('Y')){
 		int Ans=0;
 	    clear();
 	    rech:
@@ -546,7 +547,7 @@ int main()
 					main();
 		 		}
 		    }
-		}   
+		}
 		if(choice == 2){
 			clear();
 	        cout<<"This game is The journey of spade game."<<endl;
@@ -559,14 +560,8 @@ int main()
 	        cout << "NamePlayer : ";
 	        cin >> playername;
 	        cout << "Score : ";
-	        cin >> score;
+	        cin >> scr;
 	        round1.another();
-			do{		
-					i = getchar();
-				} while (i!='y' &&i!='n');
-				if(i=='y'){
-					main();
-		 		}
 		    }
 	    }
 	    if(choice == 3){
@@ -580,7 +575,7 @@ int main()
    			cout << "Akami  : " << discount(10000, 5000) << endl;
     		cout << "Kapkan : " << discount(10000, 5000, 2500) << endl;
     		cout << "Get    : " << count(10000, 5000) << endl;
-    		cout << playername <<" : "<< count(score) << endl;
+    		cout << playername <<" : "<< count(scr) << endl;
     		return 0;
 		}
 		else{
@@ -589,7 +584,7 @@ int main()
 			goto rech;
 		}   
 	}
-    if(in == ('n')||in == ('N')){
+    if(Ans == ('n')||Ans == ('N')){
     	cout<<"Bye bye see you next time.!!!"<<endl;
 	}
 	else{
