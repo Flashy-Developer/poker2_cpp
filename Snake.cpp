@@ -518,7 +518,6 @@ int main()
 	    cout<<"|1.Poker                                   |"<<endl;	
 	    cout<<"|2.The journey of spade                    |"<<endl;
 	    cout<<"|3.Exit                                    |"<<endl;
-	    cout<<"|4.Check score The journey of spade        |"<<endl;
 	    cout<<"|__________________________________________|"<<endl;
 	    cout<<"Please choose 1|2|3|4:";
 	    int choice;
