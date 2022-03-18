@@ -3,8 +3,6 @@
 #include <vector>
 #include <conio.h>
 #include <time.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <fstream>
 #include <string>
 
@@ -21,7 +19,7 @@ int Cstart(void);
 void Playgame(void);
 void Shuffcard(int cards[]);
 void Piccard(int num);
-
+//inheritance
 class question {
    public:
     void want() {
@@ -34,6 +32,7 @@ class round : public question {
         cout << "Want to play another round y|n :" << endl;
     }
 };
+//Class 
 class Player_2
 {
 public:
@@ -79,12 +78,12 @@ public:
             map.push_back(new La(width));
         py_2 = new Player_2(width,high);
     }
-        void Dw_();
+    void Dw_();
     void keyboard();
     void wot();
     void Run();
 };
-
+//File txt
 int Cstart(void){
 	string myText;
 	ifstream MyReadFile("crh.txt");
@@ -103,22 +102,20 @@ int Cstart(void){
 	}
     return 0;
 }
+//Overloading
 double count(double score1) {
    	return score1;
 }	
-
 double count(double score1, double score2) {
    	return score1 - score2;
 }
-
 double discount(double score1, double score2) {
     return score1 - score2;
 }
-
 double discount(double score1, double score2, double score3) {
     return score1 - score2 - score3;
 }
-
+//File txt
 int Start(void){
 	printf("                       1111___11111\n");
 	printf("                     11____111____11__111\n");
@@ -435,7 +432,7 @@ void Piccard(int num)
 		}
 	}
 }
-
+//Scope
 void Playgame_2::Dw_()
     {
     	char fl[]={06,04};
@@ -444,8 +441,8 @@ void Playgame_2::Dw_()
         {
             for (int j = 0; j < width; j++)
             {
-                if (i == 0 && (j == 0 || j == width - 1)) cout << "F";
-                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "S";
+                if (i == 0 && (j == 0 || j == width - 1)) cout << "Fn";
+                if (i == high - 1 && (j == 0 || j == width - 1)) cout << "St";
                 if (map[i]->CheckPos(j) && i != 0 && i != high - 1)
                     cout << fl[1];
                 else if (py_2->x == j && py_2->y == i)
@@ -497,7 +494,6 @@ void Playgame_2::Run()
         }
     }
 
-
 int main()
 {
 	int scr;
@@ -527,7 +523,7 @@ int main()
 	    cout<<"|                                          |"<<endl;
 	    cout<<"|1.Poker                                   |"<<endl;	
 	    cout<<"|2.The journey of spade                    |"<<endl;
-	    cout<<"|3.Exit                                    |"<<endl;
+		cout<<"|3.Exit                                    |"<<endl;
 	    cout<<"|4.Check score The journey of spade        |"<<endl;
 	    cout<<"|__________________________________________|"<<endl;
 	    cout<<"Please choose 1|2|3|4:";
@@ -556,16 +552,16 @@ int main()
 	        cout<<"This game is The journey of spade game."<<endl;
 	    	Ans=Cstart();
 	    	if(Ans==1){
-			clear();
-			Playgame_2 game(30, 8);
-			game.Run();
-	        char i='n';
-	        cout << "NamePlayer : ";
-	        cin >> playername;
-	        cout << "Score : ";
-	        cin >> scr;
-			clear();
-			goto rech;
+				clear();
+				Playgame_2 game(30, 8);
+				game.Run();
+				char i='n';
+				cout << "NamePlayer : ";
+				cin >> playername;
+				cout << "Score : ";
+				cin >> scr;
+				clear();
+				goto rech;
 		    }
 	    }
 	    if(choice == 3){
