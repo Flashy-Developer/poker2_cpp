@@ -46,11 +46,10 @@ public:
     {
         for (int i = 0; i < width; i++)
             obstruction.push_front(true);
-        right = rand() % 2;
     }
     void Move(){
         
-            if (rand() % 5 == 1)
+            if (rand() % 8 == 1)
                 obstruction.push_back(true);
             else
                 obstruction.push_back(false);
@@ -473,7 +472,7 @@ void Playgame_2::wot()
     {
         for (int i = 1; i < high - 1; i++)
         {
-            if (rand() % 5 == 1)
+            if (rand() % 8 == 1)
                 map[i]->Move();
             if (map[i]->CheckPos(py_2->x) && py_2->y == i)
                 quit = true;
@@ -561,7 +560,8 @@ int main()
 	        cin >> playername;
 	        cout << "Score : ";
 	        cin >> scr;
-	        round1.another();
+			clear();
+			goto rech;
 		    }
 	    }
 	    if(choice == 3){
